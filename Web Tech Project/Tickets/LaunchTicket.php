@@ -8,10 +8,12 @@ $day="";
 $err_day="";
 $month="";
 $err_month="";
-$year="";
-$err_year="";
-	
-	
+
+
+$day1="";
+$month1="";
+
+
 $err=false;
 
 
@@ -32,34 +34,32 @@ if(empty($_POST["tocity"])){
 			$tocity=$_POST["tocity"];
 		}
 		if (!isset($_POST["day"])){
+			
 				$err_day="Please select a DAY,";
+					$err = true;
 		}
 		else{
 			$day=$_POST["day"];
 		}
 		if (!isset($_POST["month"])){
 			$err_month="MONTH";
+				$err = true;
 		}
 		else{
 			$month=$_POST["month"];
 		}
-		if (!isset($_POST["year"])){
-			$err_year="and YEAR";
-		}
-		else{
-			$year=$_POST["year"];
-		}
-
+		
 	if(!$err){
-			echo "fromcity: ".htmlspecialchars($_POST["fromcity"])."<br>";
-		    echo "tocity: ".htmlspecialchars($_POST["tocity"])."<br>";
-			echo "day: ".htmlspecialchars($_POST["day"])."<br>";
-			echo "month: ".htmlspecialchars($_POST["month"])."<br>";
-			echo "year: ".htmlspecialchars($_POST["year"])."<br>";
+			echo "From: ".htmlspecialchars($_POST["fromcity"])."<br>";
+		    echo "To: ".htmlspecialchars($_POST["tocity"])."<br>";
+			echo "Day of Journey: ".htmlspecialchars($_POST["day"])."<br>";
+			echo "Month of Journey: ".htmlspecialchars($_POST["month"])."<br>";
 			
-			echo "Day1: ".htmlspecialchars($_POST["day1"])."<br>";
-			echo "Month1: ".htmlspecialchars($_POST["month1"])."<br>";
-			echo "Year1: ".htmlspecialchars($_POST["year1"])."<br>";
+			
+			echo "Day of Return: ".htmlspecialchars($_POST["day1"])."<br>";
+			echo "Month of Return: ".htmlspecialchars($_POST["month1"])."<br>";
+			
+			
 		}
 
 }
@@ -69,11 +69,13 @@ if(empty($_POST["tocity"])){
 
 
 <html>
-	<body>
-	<title>Plane Ticket</title>
-	<fieldset><form action="" method="post">
-	<legend><h1>Plane Ticket</h1></legend>
+	<body><title>Launch Ticket</title>
+	<fieldset><legend align="center"><h1>Launch Ticket</h1></legend>
+	<a href="..\HomePage.php">Go Back To Home</a>
+	<form action="" method="post">
+	
 	<form border>
+	<fieldset>
 	<table align = "center">
 	<tr>
 		<td>
@@ -115,17 +117,9 @@ if(empty($_POST["tocity"])){
 										}
 									?>
 						</select>
-						<select name="year">
-							<option selected disabled>Year</option>
-									<?php
-										for($k=1948;$k<=2020;$k++)
-										{
-											echo "<option>$k</option>";
-										}
-									?>
-						</select>
+						
 					</td>
-					<td><?php echo "$err_day"."  "."$err_month"."  "."$err_year"?></td>
+					<td><?php echo "$err_day"."  "."$err_month".""?></td>
 				</tr>
 	<tr>
 				<td>Date of Return<br>(optional)</td>
@@ -149,25 +143,32 @@ if(empty($_POST["tocity"])){
 										}
 									?>
 						</select>
-						<select name="year1">
-							<option selected disabled>Year</option>
-									<?php
-										for($k1=1948;$k1<=2020;$k1++)
-										{
-											echo "<option>$k1</option>";
-										}
-									?>
-						</select>
+						
 					</td>
 					
 				</tr>
 	<tr>
+		<td>
+			Any Medical Issue
+		</td>
+		<td>
+			<input type="radio" value="Yes" <?php if($medical = "Yes") echo "checked";?> name="medical"> Yes <input <?php if($medical = "No") echo "checked";?> name="medical"  value="No" type="radio"> No
+		</td>
+		
+	</tr>			
+	<tr>
 		<td colspan="2" align="center">
-			<input type="submit" value="Search Launches">
+			<input type="submit" value="Search Launchs">
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center">
+		<a href="..\Search\Launch search.php">Search Launchs</a>
 		</td>
 	</tr>
 	</table>	
-	<form>
+	</fieldset>
+	</form>
 	</fieldset>
 	</body>
-</html>
+</html> 
