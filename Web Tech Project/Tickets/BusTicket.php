@@ -13,6 +13,8 @@ $err_month="";
 $day1="";
 $month1="";
 
+$medical="";
+$err_medical="";
 
 $err=false;
 
@@ -48,6 +50,13 @@ if(empty($_POST["tocity"])){
 		else{
 			$month=$_POST["month"];
 		}
+		if(!isset($_POST["medical"])){
+			$err_medical="Please select ATLEAST 1 option.";
+			$err = true;
+		}
+		else{
+			$medical = $_POST["medical"];
+		}
 		
 	if(!$err){
 			echo "From: ".htmlspecialchars($_POST["fromcity"])."<br>";
@@ -55,10 +64,9 @@ if(empty($_POST["tocity"])){
 			echo "Day of Journey: ".htmlspecialchars($_POST["day"])."<br>";
 			echo "Month of Journey: ".htmlspecialchars($_POST["month"])."<br>";
 			
-			
 			echo "Day of Return: ".htmlspecialchars($_POST["day1"])."<br>";
 			echo "Month of Return: ".htmlspecialchars($_POST["month1"])."<br>";
-			
+			echo "Medical: ".htmlspecialchars($_POST["medical"])."<br>";
 			
 		}
 
@@ -151,8 +159,11 @@ if(empty($_POST["tocity"])){
 			Any Medical Issue
 		</td>
 		<td>
-			<input type="radio" value="Yes" <?php if($medical = "Yes") echo "checked";?> name="medical"> Yes <input <?php if($medical = "No") echo "checked";?> name="medical"  value="No" type="radio"> No
-		</td>
+		<input type="radio" value="Yes" <?php if($medical == "Yes") echo "checked";?> name="medical"> Yes <input <?php if($medical == "No") echo "checked";?> name="medical"  value="No" type="radio"> No</td>
+
+	    <td><span><?php echo $err_medical;?></span></td>
+		
+		
 		
 	</tr>
 	<tr>
